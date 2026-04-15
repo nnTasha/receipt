@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "moduleSuffixes": [".ios", ".android", ""],
+    "jsx": "react-native",
+    "allowJs": true,
+    "checkJs": true,
+    "noImplicitAny": false
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
+}
