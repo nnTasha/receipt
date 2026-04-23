@@ -10,16 +10,30 @@ import { IconButton } from "components/IconButton";
 export const MealDetailsScreen = ({ route }) => {
   const { mealId } = route.params;
   const navigation = useNavigation();
+  const favoriteMealsCtx = useContext(FavoritesContext);
+
+  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+  const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
+
+  const changeFavoriteStatusHandler = () => {
+    if (mealIsFavorite) {
+      favoriteMealsCtx.removeFavorite(mealId);
+    } else {
+      favoriteMealsCtx.addFavorite(mealId);
+    }
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <IconButton icon="star" color="white" onPress={() => {}} />
+        <IconButton
+          icon={mealIsFavorite ? "star" : "star-outline"}
+          color="white"
+          onPress={changeFavoriteStatusHandler}
+        />
       ),
     });
   }, [navigation]);
-
-  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
   return (
     <ScrollView style={styles.container}>
